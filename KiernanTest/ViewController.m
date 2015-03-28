@@ -66,6 +66,10 @@ NSString *file;
         [self presentViewController:imagePicker
                            animated:YES completion:nil];
         _newMedia = YES;
+        
+        data = UIImagePNGRepresentation(_imageView.image);
+        //        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
+        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
     }
     
 }
@@ -112,7 +116,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         //        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
         file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
     }
-}
+} //// *************  MAKE SURE TO CHANGE THIS ALONG WITH THE PHYSICAL CAMERA *********************//
 
 -(void)image:(UIImage *)image
 finishedSavingWithError:(NSError *)error
@@ -136,19 +140,17 @@ finishedSavingWithError:(NSError *)error
 }
 
 -(IBAction)upload:(id)sender{
-NSString *text = @"Hello world pt2.";
-NSString *filename = @"working-draft2.txt";
-NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-NSString *localPath = [localDir stringByAppendingPathComponent:filename];
+//NSString *text = @"Hello world pt2.";
+//NSString *filename = @"working-draft2.txt";
+//NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+//NSString *localPath = [localDir stringByAppendingPathComponent:filename];
 //[text writeToFile:localPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 
     [data writeToFile:file atomically:YES];
-    //[DBRestClient uploadFile:@"upload.png" toPath:@"Dropbox/Path" fromPath:file];
     
 // Upload file to Dropbox
-NSString *destDir = @"/";
-//[self.restClient uploadFile:filename toPath:destDir withParentRev:nil fromPath:localPath];
-   [self.restClient uploadFile:@"upload.png" toPath:destDir withParentRev:nil fromPath:file];
+    NSString *destDir = @"/";
+    [self.restClient uploadFile:@"upload.png" toPath:destDir withParentRev:nil fromPath:file];
 
 }
 
@@ -163,8 +165,24 @@ NSString *destDir = @"/";
 
 #pragma mark - Browse DropBox
 
--(IBAction)browse:(id)sender{
-    
-}
+//-(IBAction)browse:(id)sender{
+//    
+//    [self.restClient loadMetadata:@"/"];
+//    
+//}
+//
+//- (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
+//    if (metadata.isDirectory) {
+//        NSLog(@"Folder '%@' contains:", metadata.path);
+//        for (DBMetadata *file in metadata.contents) {
+//            NSLog(@"	%@", file.filename);
+//        }
+//    }
+//}
+//
+//- (void)restClient:(DBRestClient *)client
+//loadMetadataFailedWithError:(NSError *)error {
+//    NSLog(@"Error loading metadata: %@", error);
+//}
 
 @end

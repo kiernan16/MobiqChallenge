@@ -16,6 +16,7 @@
 		34282F361AC64211001056CB /* KiernanTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34282F351AC64211001056CB /* KiernanTestTests.m */; };
 		34282F441AC642E8001056CB /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34282F431AC642E8001056CB /* DropboxSDK.framework */; };
 		34282F461AC648AB001056CB /* REQUIREMENTS in Resources */ = {isa = PBXBuildFile; fileRef = 34282F451AC648AB001056CB /* REQUIREMENTS */; };
+		34282F491AC6680E001056CB /* Browse.m in Sources */ = {isa = PBXBuildFile; fileRef = 34282F481AC6680E001056CB /* Browse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		34282F351AC64211001056CB /* KiernanTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KiernanTestTests.m; sourceTree = "<group>"; };
 		34282F431AC642E8001056CB /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 		34282F451AC648AB001056CB /* REQUIREMENTS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = REQUIREMENTS; sourceTree = "<group>"; };
+		34282F471AC667BF001056CB /* Browse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Browse.h; sourceTree = "<group>"; };
+		34282F481AC6680E001056CB /* Browse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Browse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 				34282F1E1AC64211001056CB /* AppDelegate.m */,
 				34282F201AC64211001056CB /* ViewController.h */,
 				34282F211AC64211001056CB /* ViewController.m */,
+				34282F471AC667BF001056CB /* Browse.h */,
+				34282F481AC6680E001056CB /* Browse.m */,
 				34282F231AC64211001056CB /* Main.storyboard */,
 				34282F261AC64211001056CB /* Images.xcassets */,
 				34282F281AC64211001056CB /* LaunchScreen.xib */,
@@ -228,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34282F221AC64211001056CB /* ViewController.m in Sources */,
+				34282F491AC6680E001056CB /* Browse.m in Sources */,
 				34282F1F1AC64211001056CB /* AppDelegate.m in Sources */,
 				34282F1C1AC64211001056CB /* main.m in Sources */,
 			);
