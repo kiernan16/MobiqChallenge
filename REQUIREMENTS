@@ -1,0 +1,35 @@
+Mobiquity Mobile Code Challenge
+
+Instructions
+Please complete the challenge explained below within 48 hours of receiving the assignment. You should try to complete as much of the functionality as you can in the time allotted-- failure to include all functionality will not result in disqualification. To submit, please push the source code to your Github account and email a link to the repository when you are finished.
+
+The assignment
+Write an application that:
+•	Allows a user to authenticate with their Dropbox credentials
+•	Allows a user to take a photo
+•	Uploads the photo to a directory on Dropbox
+•	Lists all photos that have been uploaded to that directory, and view selected photos
+
+Additional functionality
+•	Records the GPS coordinates of the photograph
+•	Display all photos in the user’s Dropbox directory on a map
+•	Share uploaded photo with friends on Facebook
+•	Title of the photo should contain city where it was taken
+•	Write some unit tests
+•	Allow user to apply effects to photographs
+•	Allow user to record sound clips in addition to photographs
+•	Allow user to trim sound clips
+•	Allow user to create and store text notes in addition to sound clips and photographs
+•	Provide a rich text editor for text notes
+
+Grading criteria
+The following will be evaluated in the following order:
+•	Code quality (40)
+•	Code organization (15)
+•	Functions as expected (15)
+•	Error handling / Negative test cases considered (10)
+•	Performance (10)
+•	Includes all required functionality (10)
+
+Need help?
+If you have any questions, please contact Daniel @ dcohen@mobiquityinc.com or Elise @ ecarmichael@mobiquityinc.com.

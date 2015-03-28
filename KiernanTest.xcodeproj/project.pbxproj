@@ -14,6 +14,8 @@
 		34282F271AC64211001056CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34282F261AC64211001056CB /* Images.xcassets */; };
 		34282F2A1AC64211001056CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34282F281AC64211001056CB /* LaunchScreen.xib */; };
 		34282F361AC64211001056CB /* KiernanTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34282F351AC64211001056CB /* KiernanTestTests.m */; };
+		34282F441AC642E8001056CB /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34282F431AC642E8001056CB /* DropboxSDK.framework */; };
+		34282F461AC648AB001056CB /* REQUIREMENTS in Resources */ = {isa = PBXBuildFile; fileRef = 34282F451AC648AB001056CB /* REQUIREMENTS */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		34282F2F1AC64211001056CB /* KiernanTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiernanTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		34282F341AC64211001056CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34282F351AC64211001056CB /* KiernanTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KiernanTestTests.m; sourceTree = "<group>"; };
+		34282F431AC642E8001056CB /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
+		34282F451AC648AB001056CB /* REQUIREMENTS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = REQUIREMENTS; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34282F441AC642E8001056CB /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,9 +68,11 @@
 		34282F0D1AC64210001056CB = {
 			isa = PBXGroup;
 			children = (
+				34282F431AC642E8001056CB /* DropboxSDK.framework */,
 				34282F181AC64211001056CB /* KiernanTest */,
 				34282F321AC64211001056CB /* KiernanTestTests */,
 				34282F171AC64211001056CB /* Products */,
+				34282F451AC648AB001056CB /* REQUIREMENTS */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,6 +206,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34282F461AC648AB001056CB /* REQUIREMENTS in Resources */,
 				34282F251AC64211001056CB /* Main.storyboard in Resources */,
 				34282F2A1AC64211001056CB /* LaunchScreen.xib in Resources */,
 				34282F271AC64211001056CB /* Images.xcassets in Resources */,
@@ -343,6 +351,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/dropbox-ios-sdk-1.3.13",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = KiernanTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -353,6 +366,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/dropbox-ios-sdk-1.3.13",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = KiernanTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
