@@ -7,22 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface ViewController : UIViewController{
+@interface ViewController : UIViewController<UIImagePickerControllerDelegate,
+UINavigationControllerDelegate>{
     IBOutlet UIButton *login;
     IBOutlet UIButton *upload;
     IBOutlet UIButton *TakePhoto;
-//    IBOutlet UIButton *CameraRoll;
+    IBOutlet UIButton *CameraRoll;
     IBOutlet UIButton *browse;
 }
 
 @property BOOL newMedia;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
--(IBAction)didPressLink:(id)sender;
+-(IBAction)login:(id)sender;
 -(IBAction)upload:(id)sender;
 -(IBAction)TakePhoto:(id)sender;
-//-(IBAction)CameraRoll:(id)sender);
+-(IBAction)CameraRoll:(id)sender;
 -(IBAction)browse:(id)sender;
 
 @end

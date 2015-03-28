@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUU-vM-atB">
-                                <rect key="frame" x="245" y="550" width="111" height="30"/>
+                                <rect key="frame" x="473" y="550" width="111" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Ow7-bQ-jPg"/>
                                     <constraint firstAttribute="width" constant="111" id="XoS-zt-6vP"/>
@@ -29,8 +30,57 @@
                                     <action selector="upload:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zZs-Bb-9ML"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJr-i4-LN2">
+                                <rect key="frame" x="232" y="480" width="137" height="112"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="112" id="C2M-mK-dks"/>
+                                    <constraint firstAttribute="width" constant="137" id="WXU-hd-Wax"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleColor" red="0.0040457589290000002" green="0.0020316782219999998" blue="8.3676592749999993e-06" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="TakePhoto:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="p5u-I9-87C"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGP-lp-kQx">
+                                <rect key="frame" x="16" y="499" width="101" height="81"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="101" id="8IY-BD-d3X"/>
+                                    <constraint firstAttribute="height" constant="81" id="eso-f0-4jk"/>
+                                </constraints>
+                                <state key="normal" title="Camera Roll">
+                                    <color key="titleColor" red="0.0040457589290000002" green="0.0020316782219999998" blue="8.3676592749999993e-06" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="CameraRoll:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Z5d-RT-wxL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ip-07-VBV">
+                                <rect key="frame" x="468" y="20" width="116" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="116" id="Gpp-KR-qfZ"/>
+                                    <constraint firstAttribute="height" constant="58" id="SQM-Af-gQ7"/>
+                                </constraints>
+                                <state key="normal" title="Browse">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="browse:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="DPI-Gu-Ffe"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5BI-2F-zl6">
+                                <rect key="frame" x="175" y="175" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="7R5-1V-5f6"/>
+                                    <constraint firstAttribute="height" constant="250" id="VdX-1Z-Ylj"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v19-NH-JgZ">
-                                <rect key="frame" x="261" y="478" width="79" height="30"/>
+                                <rect key="frame" x="261" y="285" width="79" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="79" id="6km-tR-zEu"/>
                                     <constraint firstAttribute="height" constant="30" id="PY1-Ti-E2Y"/>
@@ -39,19 +89,31 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didPressLink:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3xF-Gh-30A"/>
+                                    <action selector="login:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SLQ-ep-M9r"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OUU-vM-atB" firstAttribute="top" secondItem="v19-NH-JgZ" secondAttribute="bottom" constant="42" id="Fyq-ce-itu"/>
-                            <constraint firstAttribute="centerX" secondItem="OUU-vM-atB" secondAttribute="centerX" id="X2k-zl-G3l"/>
-                            <constraint firstAttribute="centerX" secondItem="v19-NH-JgZ" secondAttribute="centerX" id="euR-zT-Xq6"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="OUU-vM-atB" secondAttribute="bottom" constant="20" id="taf-Cn-DUD"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="OUU-vM-atB" secondAttribute="bottom" constant="20" id="1Sl-yc-Fq6"/>
+                            <constraint firstAttribute="centerX" secondItem="zJr-i4-LN2" secondAttribute="centerX" id="336-y7-peL"/>
+                            <constraint firstAttribute="centerX" secondItem="5BI-2F-zl6" secondAttribute="centerX" id="Geb-Vc-kMy"/>
+                            <constraint firstItem="3ip-07-VBV" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="UQ6-dj-Xhw"/>
+                            <constraint firstItem="WGP-lp-kQx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="aTf-iV-CYI"/>
+                            <constraint firstItem="3ip-07-VBV" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="ajj-I6-yfH"/>
+                            <constraint firstAttribute="centerY" secondItem="5BI-2F-zl6" secondAttribute="centerY" id="h9Z-h6-2Vk"/>
+                            <constraint firstItem="OUU-vM-atB" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="kg6-Le-SEF"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="zJr-i4-LN2" secondAttribute="bottom" constant="8" id="lFO-jX-4cn"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="WGP-lp-kQx" secondAttribute="bottom" constant="20" id="nfI-ps-NIU"/>
+                            <constraint firstAttribute="centerY" secondItem="v19-NH-JgZ" secondAttribute="centerY" id="rVN-AW-0Nm"/>
+                            <constraint firstAttribute="centerX" secondItem="v19-NH-JgZ" secondAttribute="centerX" id="tb5-KH-eQ6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="CameraRoll" destination="WGP-lp-kQx" id="zps-7g-3Q6"/>
+                        <outlet property="TakePhoto" destination="zJr-i4-LN2" id="d2O-R1-iGt"/>
+                        <outlet property="browse" destination="3ip-07-VBV" id="eQG-uC-RNC"/>
+                        <outlet property="imageView" destination="5BI-2F-zl6" id="bww-X4-lo7"/>
                         <outlet property="login" destination="v19-NH-JgZ" id="LGx-jP-55o"/>
                         <outlet property="upload" destination="OUU-vM-atB" id="vJZ-ii-s1q"/>
                     </connections>
