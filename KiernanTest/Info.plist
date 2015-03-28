@@ -31,18 +31,18 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSMultipleInstancesProhibited</key>
+	<true/>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSSupportsSuddenTermination</key>
+	<true/>
+	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>NSSupportsSuddenTermination</key>
-	<true/>
-	<key>UIApplicationExitsOnSuspend</key>
-	<true/>
-	<key>LSMultipleInstancesProhibited</key>
-	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

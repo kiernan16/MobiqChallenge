@@ -15,6 +15,8 @@
 
 @implementation AppDelegate
 
+//initWithAppKey:@"mpet0bx8o2qw8vs"
+//appSecret:@"wn3pc87o6yhc6nk"
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

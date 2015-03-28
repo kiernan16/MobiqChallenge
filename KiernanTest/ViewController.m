@@ -24,11 +24,16 @@ NSString *file;
     self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     self.restClient.delegate = self;
     
+    if (![[DBSession sharedSession] isLinked]) {
+    
     login.hidden = NO;
     upload.hidden = YES;
     browse.hidden = YES;
     TakePhoto.hidden = YES;
     CameraRoll.hidden = YES;
+    }
+    else
+        login.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

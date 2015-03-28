@@ -436,6 +436,7 @@
 				34282F3B1AC64211001056CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		34282F3C1AC64211001056CB /* Build configuration list for PBXNativeTarget "KiernanTestTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +445,7 @@
 				34282F3E1AC64211001056CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -62,6 +62,7 @@ NSString *pathcomp;
     [self.tableView reloadData];
 }
 
+
 - (void)restClient:(DBRestClient *)client loadedFile:(NSString *)localPath
        contentType:(NSString *)contentType metadata:(DBMetadata *)metadata {
     NSLog(@"File loaded into path: %@", localPath);
@@ -73,13 +74,20 @@ NSString *pathcomp;
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents directory
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"/"];
     NSError *error;
-        
-    [self.restClient loadFile:@"/KiernanTest/" intoPath:filePath];
+    
+    NSString *thisthing = [NSString stringWithFormat:@"/%@", pathcomp];
+    
+   // [self.restClient loadFile:@"/" intoPath:filePath];
     
     if (filePath) { // check if file exists - if so load it:
-        NSString *tempTextOut = [NSString stringWithContentsOfFile:pathcomp
-                                                          encoding:NSUTF8StringEncoding
-                                                             error:&error];
+//        NSString *tempTextOut = [NSString stringWithContentsOfFile:pathcomp
+//                                                          encoding:NSUTF8StringEncoding
+//                                                             error:&error];
+        
+        [self.restClient loadFile:thisthing intoPath:filePath];
+        
+        
+       // [yourImageView setImage: [UIImage imageNamed: @"MyDropBoxPhotos.jpg"]];
     }
 }
 
@@ -121,6 +129,7 @@ NSString *pathcomp;
     }
     
     cell.textLabel.text = [dropboxURLs objectAtIndex:indexPath.row];
+    
     
     return cell;
 }
