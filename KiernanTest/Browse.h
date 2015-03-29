@@ -15,10 +15,9 @@
 @interface Browse : UITableViewController <UITableViewDataSource, UITableViewDelegate,DBRestClientDelegate>
 {
     DBRestClient *restClient;
-    NSMutableArray *dropboxURLs;
-    
+    NSMutableArray *dropboxURLs;    
 }
-
+@property (nonatomic, copy, readwrite) NSMutableArray *fileList;
 @end
 
 #endif

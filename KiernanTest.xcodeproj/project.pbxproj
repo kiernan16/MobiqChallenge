@@ -17,6 +17,7 @@
 		34282F441AC642E8001056CB /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34282F431AC642E8001056CB /* DropboxSDK.framework */; };
 		34282F461AC648AB001056CB /* REQUIREMENTS in Resources */ = {isa = PBXBuildFile; fileRef = 34282F451AC648AB001056CB /* REQUIREMENTS */; };
 		34282F491AC6680E001056CB /* Browse.m in Sources */ = {isa = PBXBuildFile; fileRef = 34282F481AC6680E001056CB /* Browse.m */; };
+		34282F4F1AC78110001056CB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34282F4E1AC78110001056CB /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		34282F451AC648AB001056CB /* REQUIREMENTS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = REQUIREMENTS; sourceTree = "<group>"; };
 		34282F471AC667BF001056CB /* Browse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Browse.h; sourceTree = "<group>"; };
 		34282F481AC6680E001056CB /* Browse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Browse.m; sourceTree = "<group>"; };
+		34282F4E1AC78110001056CB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34282F4F1AC78110001056CB /* CoreLocation.framework in Frameworks */,
 				34282F441AC642E8001056CB /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +74,7 @@
 		34282F0D1AC64210001056CB = {
 			isa = PBXGroup;
 			children = (
+				34282F4E1AC78110001056CB /* CoreLocation.framework */,
 				34282F431AC642E8001056CB /* DropboxSDK.framework */,
 				34282F181AC64211001056CB /* KiernanTest */,
 				34282F321AC64211001056CB /* KiernanTestTests */,

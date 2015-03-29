@@ -18,6 +18,8 @@
 @end
 
 NSString *pathcomp;
+//NSString *thatthing;
+NSString *filePath;
 @implementation Browse
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -55,24 +57,26 @@ NSString *pathcomp;
                 [dropboxURLs addObject:file.filename];
                 [self DBdownload];
                 
-             //   [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+              //  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
             }
         }
     }
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 }
 
 
 - (void)restClient:(DBRestClient *)client loadedFile:(NSString *)localPath
        contentType:(NSString *)contentType metadata:(DBMetadata *)metadata {
     NSLog(@"File loaded into path: %@", localPath);
+    //thatthing = [NSString stringWithFormat:@"%@/%@", filePath,pathcomp];
+    [self.tableView reloadData];
 }
 
 -(void) DBdownload//:(id)sender
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents directory
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"/"];
+    filePath = [documentsDirectory stringByAppendingPathComponent:@"/"];
     NSError *error;
     
     NSString *thisthing = [NSString stringWithFormat:@"/%@", pathcomp];
@@ -85,9 +89,6 @@ NSString *pathcomp;
 //                                                             error:&error];
         
         [self.restClient loadFile:thisthing intoPath:filePath];
-        
-        
-       // [yourImageView setImage: [UIImage imageNamed: @"MyDropBoxPhotos.jpg"]];
     }
 }
 
@@ -120,18 +121,32 @@ NSString *pathcomp;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"FileCell";
+    static NSString *CellIdentifier = @"DropboxBrowserCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    cell.textLabel.text = [dropboxURLs objectAtIndex:indexPath.row];
+   cell.textLabel.text = [dropboxURLs objectAtIndex:indexPath.row];
     
+    cell.detailTextLabel.text = [dropboxURLs objectAtIndex:indexPath.row];
+    cell.imageView.image = [UIImage imageNamed: @"this.png"];
+//    DBMetadata *file = (DBMetadata *)(self.fileList)[indexPath.row];
+//    cell.textLabel.text = file.filename;
+//    [cell.textLabel setNeedsDisplay];
+//    cell.imageView.image = [UIImage imageNamed:file.icon];
+    //cell.imageView.image = setImage: [UIImage imageNamed: @"MyDropBoxPhotos.jpg"]];
+
+    cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+    
+    
+    if(cell.imageView.image ==nil)
+    NSLog(@"BUTT: %@",pathcomp); //
     
     return cell;
+    
 }
 
 

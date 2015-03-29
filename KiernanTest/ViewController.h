@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface ViewController : UIViewController<UIImagePickerControllerDelegate,
-UINavigationControllerDelegate>{
+UINavigationControllerDelegate,CLLocationManagerDelegate>{
     IBOutlet UIButton *login;
     IBOutlet UIButton *upload;
     IBOutlet UIButton *TakePhoto;

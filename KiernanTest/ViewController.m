@@ -9,14 +9,20 @@
 #import "ViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 
-@interface ViewController () <DBRestClientDelegate>
+@interface ViewController () <DBRestClientDelegate, CLLocationManagerDelegate>
 @property (nonatomic, strong) DBRestClient *restClient;
 @end
 
-@implementation ViewController
+@implementation ViewController{
+    CLLocationManager *locationManager;
+    MKPointAnnotation *point;// = [[MKPointAnnotation alloc] init];
+}
 
 NSData *data;
 NSString *file;
+
+CLLocation *userLocation;
+CLLocationCoordinate2D coordinate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,7 +80,7 @@ NSString *file;
         
         data = UIImagePNGRepresentation(_imageView.image);
         //        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
-        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
+        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"this.png"];
     }
     
 }
@@ -119,7 +125,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         // ADDED ******************
         data = UIImagePNGRepresentation(_imageView.image);
         //        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
-        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
+        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"this.png"];
     }
 } //// *************  MAKE SURE TO CHANGE THIS ALONG WITH THE PHYSICAL CAMERA *********************//
 
@@ -155,7 +161,7 @@ finishedSavingWithError:(NSError *)error
     
 // Upload file to Dropbox
     NSString *destDir = @"/";
-    [self.restClient uploadFile:@"upload.png" toPath:destDir withParentRev:nil fromPath:file];
+    [self.restClient uploadFile:@"this.png" toPath:destDir withParentRev:nil fromPath:file];
 
 }
 
