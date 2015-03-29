@@ -113,6 +113,13 @@ CLLocationCoordinate2D coordinate;
             city = placemark.locality;
             NSLog(@"THIS IS THE CITY: %@",city);
             takenAt = [NSString stringWithFormat:@"Mobile Upload, %@.png",city];
+            
+//            if(city){
+//                takenAt = [NSString stringWithFormat:@"Mobile Upload, %@.png",city];
+//            }
+//            else{
+//                takenAt = @"Mobile Upload";
+//            }
         }
         else
             NSLog(@"%@",error.debugDescription);

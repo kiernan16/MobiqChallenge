@@ -20,6 +20,7 @@
 NSString *pathcomp;
 NSString *local;
 NSString *filePath;
+UIImageView *imageView;
 //NSMutableArray *pathArray;
 
 @implementation Browse
@@ -46,7 +47,7 @@ NSString *filePath;
 {
     [super viewDidLoad];
     
-//    pathArray = [[NSMutableArray alloc] initWithCapacity:0];
+//    pathArray = [[NSMutableArray alloc] init];//WithCapacity:0];
 
     dropboxURLs = [[NSMutableArray alloc] init];
     [[self restClient] loadMetadata:@"/"];
@@ -62,7 +63,6 @@ NSString *filePath;
                 [dropboxURLs addObject:file.filename];
                 [self DBdownload];
                 
-              //  [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
             }
         }
     }
@@ -72,10 +72,9 @@ NSString *filePath;
 - (void)restClient:(DBRestClient *)client loadedFile:(NSString *)localPath
        contentType:(NSString *)contentType metadata:(DBMetadata *)metadata {
     NSLog(@"File loaded into path: %@", localPath);
-    //thatthing = [NSString stringWithFormat:@"%@/%@", filePath,pathcomp];
     local = localPath;
 //    [pathArray addObject:local];
- //   NSLog(@"BIRDY: %@",pathArray);
+//    NSLog(@"BIRDY: %@",pathArray);
     [self.tableView reloadData];
 }
 
@@ -86,8 +85,6 @@ NSString *filePath;
     filePath = [documentsDirectory stringByAppendingPathComponent:@"/"];
     
     NSString *thisthing = [NSString stringWithFormat:@"/%@", pathcomp];
-    
-   // [self.restClient loadFile:@"/" intoPath:filePath];
     
     if (filePath) { // check if file exists - if so load it:
         
@@ -141,16 +138,12 @@ NSString *filePath;
    // cell.imageView.image = [pathArray objectAtIndex:indexPath.row];
     
 
-    //    cell.imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
+ //       cell.imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
     
     
-    cell.imageView.image = [UIImage imageNamed: local];
+   // cell.imageView.image = [UIImage imageNamed: local];
     
     cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
-    
-    
-    if(cell.imageView.image ==nil)
-    NSLog(@"BUTT: %@",pathcomp); //
     
     return cell;
     
@@ -158,12 +151,29 @@ NSString *filePath;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIAlertView *messageAlert = [[UIAlertView alloc]
-                                 initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+
+    UITableViewCell *cell = tableView.visibleCells[indexPath.row];
+    
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)];
+    imageView.image = [UIImage imageNamed: local];
+    imageView.userInteractionEnabled=YES;
+    imageView.center = self.view.center;
+    [self.view addSubview:imageView];
+    
+    cell.imageView.image = [UIImage imageNamed:local];
+ //   cell.imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
+    
+    //clear pic
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(imageTouched:)];
+    lpgr.minimumPressDuration = 0.05;
+    [imageView addGestureRecognizer:lpgr];
     
     
-    // Display Alert Message
-    [messageAlert show];
+}
+
+- (void)imageTouched:(UILongPressGestureRecognizer *)gestureRecognizer {
+    
+    imageView.hidden=YES;
     
 }
 
