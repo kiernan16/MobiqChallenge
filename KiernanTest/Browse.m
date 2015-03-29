@@ -105,7 +105,7 @@ UIImageView *imageView;
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark - TableView Data 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -141,9 +141,7 @@ UIImageView *imageView;
  //       cell.imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
     
     
-   // cell.imageView.image = [UIImage imageNamed: local];
-    
-    cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+    cell.imageView.image = [UIImage imageNamed: local];
     
     return cell;
     
@@ -160,7 +158,7 @@ UIImageView *imageView;
     imageView.center = self.view.center;
     [self.view addSubview:imageView];
     
-    cell.imageView.image = [UIImage imageNamed:local];
+  //  cell.imageView.image = [UIImage imageNamed:local];
  //   cell.imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
     
     //clear pic
