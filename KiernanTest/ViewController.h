@@ -17,6 +17,12 @@ UINavigationControllerDelegate,CLLocationManagerDelegate>{
     IBOutlet UIButton *TakePhoto;
     IBOutlet UIButton *CameraRoll;
     IBOutlet UIButton *browse;
+
+    NSData *data;
+    NSString *file;
+    NSString *city;
+    NSString *takenAt;
+    NSString *text;
 }
 
 @property BOOL newMedia;

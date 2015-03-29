@@ -17,11 +17,9 @@
 
 @end
 
-NSString *pathcomp;
-NSString *local;
-NSString *filePath;
-UIImageView *imageView;
-//NSMutableArray *pathArray;
+
+NSMutableArray *pathArray;
+int i;
 
 @implementation Browse
 
@@ -47,7 +45,8 @@ UIImageView *imageView;
 {
     [super viewDidLoad];
     
-//    pathArray = [[NSMutableArray alloc] init];//WithCapacity:0];
+    i=0;
+    pathArray = [[NSMutableArray alloc] init];//WithCapacity:0];
 
     dropboxURLs = [[NSMutableArray alloc] init];
     [[self restClient] loadMetadata:@"/"];
@@ -73,12 +72,20 @@ UIImageView *imageView;
        contentType:(NSString *)contentType metadata:(DBMetadata *)metadata {
     NSLog(@"File loaded into path: %@", localPath);
     local = localPath;
-//    [pathArray addObject:local];
+   // [pathArray addObject:local];
+    [pathArray insertObject:local atIndex:i];
+    i++;
 //    NSLog(@"BIRDY: %@",pathArray);
+    
+[self performSelector:@selector(secondMethod) withObject:nil afterDelay:9.0 ];
+    //[self.tableView reloadData];
+}
+
+-(void) secondMethod{
     [self.tableView reloadData];
 }
 
--(void) DBdownload//:(id)sender
+-(void) DBdownload
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents directory
@@ -131,17 +138,19 @@ UIImageView *imageView;
     
         /// Show TITLE, NOTES, PREVIEW in table view
     
+    /// paths are messed up *** FIX!!! ***
+    
    cell.textLabel.text = [dropboxURLs objectAtIndex:indexPath.row];
     
-    cell.detailTextLabel.text = [dropboxURLs objectAtIndex:indexPath.row];
+    cell.detailTextLabel.text = [[NSNumber numberWithLong:indexPath.row] stringValue];
    // cell.imageView.image = [UIImage imageNamed: [pathArray objectAtIndex:indexPath.row]]; //local
    // cell.imageView.image = [pathArray objectAtIndex:indexPath.row];
     
 
- //       cell.imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
+        cell.imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
     
     
-    cell.imageView.image = [UIImage imageNamed: local];
+ //   cell.imageView.image = [UIImage imageNamed: local];
     
     return cell;
     
@@ -153,7 +162,7 @@ UIImageView *imageView;
     UITableViewCell *cell = tableView.visibleCells[indexPath.row];
     
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)];
-    imageView.image = [UIImage imageNamed: local];
+    imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
     imageView.userInteractionEnabled=YES;
     imageView.center = self.view.center;
     [self.view addSubview:imageView];

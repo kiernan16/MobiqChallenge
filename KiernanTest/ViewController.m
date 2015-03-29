@@ -17,14 +17,9 @@
     CLLocationManager *locationManager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
-   // MKPointAnnotation *point;// = [[MKPointAnnotation alloc] init];
 }
 
-NSData *data;
-NSString *file;
-NSString *city;
-NSString *takenAt;
-NSString *text;
+
 
 float longcoord, latcoord;
 
