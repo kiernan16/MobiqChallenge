@@ -18,8 +18,10 @@
 @end
 
 NSString *pathcomp;
-//NSString *thatthing;
+NSString *local;
 NSString *filePath;
+//NSMutableArray *pathArray;
+
 @implementation Browse
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -43,6 +45,9 @@ NSString *filePath;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+//    pathArray = [[NSMutableArray alloc] initWithCapacity:0];
+
     dropboxURLs = [[NSMutableArray alloc] init];
     [[self restClient] loadMetadata:@"/"];
 }
@@ -61,7 +66,6 @@ NSString *filePath;
             }
         }
     }
-//    [self.tableView reloadData];
 }
 
 
@@ -69,6 +73,9 @@ NSString *filePath;
        contentType:(NSString *)contentType metadata:(DBMetadata *)metadata {
     NSLog(@"File loaded into path: %@", localPath);
     //thatthing = [NSString stringWithFormat:@"%@/%@", filePath,pathcomp];
+    local = localPath;
+//    [pathArray addObject:local];
+ //   NSLog(@"BIRDY: %@",pathArray);
     [self.tableView reloadData];
 }
 
@@ -77,16 +84,12 @@ NSString *filePath;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents directory
     filePath = [documentsDirectory stringByAppendingPathComponent:@"/"];
-    NSError *error;
     
     NSString *thisthing = [NSString stringWithFormat:@"/%@", pathcomp];
     
    // [self.restClient loadFile:@"/" intoPath:filePath];
     
     if (filePath) { // check if file exists - if so load it:
-//        NSString *tempTextOut = [NSString stringWithContentsOfFile:pathcomp
-//                                                          encoding:NSUTF8StringEncoding
-//                                                             error:&error];
         
         [self.restClient loadFile:thisthing intoPath:filePath];
     }
@@ -129,16 +132,20 @@ NSString *filePath;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
+        /// Show TITLE, NOTES, PREVIEW in table view
+    
    cell.textLabel.text = [dropboxURLs objectAtIndex:indexPath.row];
     
     cell.detailTextLabel.text = [dropboxURLs objectAtIndex:indexPath.row];
-    cell.imageView.image = [UIImage imageNamed: @"this.png"];
-//    DBMetadata *file = (DBMetadata *)(self.fileList)[indexPath.row];
-//    cell.textLabel.text = file.filename;
-//    [cell.textLabel setNeedsDisplay];
-//    cell.imageView.image = [UIImage imageNamed:file.icon];
-    //cell.imageView.image = setImage: [UIImage imageNamed: @"MyDropBoxPhotos.jpg"]];
+   // cell.imageView.image = [UIImage imageNamed: [pathArray objectAtIndex:indexPath.row]]; //local
+   // cell.imageView.image = [pathArray objectAtIndex:indexPath.row];
+    
 
+    //    cell.imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
+    
+    
+    cell.imageView.image = [UIImage imageNamed: local];
+    
     cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
     
     
@@ -149,5 +156,15 @@ NSString *filePath;
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIAlertView *messageAlert = [[UIAlertView alloc]
+                                 initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    
+    // Display Alert Message
+    [messageAlert show];
+    
+}
 
 @end

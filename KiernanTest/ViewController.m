@@ -23,6 +23,10 @@
 NSData *data;
 NSString *file;
 NSString *city;
+NSString *takenAt;
+NSString *text;
+
+float longcoord, latcoord;
 
 CLLocation *userLocation;
 CLLocationCoordinate2D coordinate;
@@ -43,8 +47,6 @@ CLLocationCoordinate2D coordinate;
         [locationManager requestWhenInUseAuthorization];
     }
     
-    //[self.GPSMap addGestureRecognizer:lpgr];
-    
     [locationManager requestWhenInUseAuthorization];
     [locationManager requestAlwaysAuthorization];
     
@@ -63,6 +65,13 @@ CLLocationCoordinate2D coordinate;
     
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - GPS
 
 - (NSString *)deviceLocation {
     return [NSString stringWithFormat:@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude];
@@ -92,22 +101,18 @@ CLLocationCoordinate2D coordinate;
     [locationManager setDistanceFilter:kCLDistanceFilterNone];
     
     [locationManager startUpdatingLocation];
-    
-//    userLocation= [[CLLocation alloc]
-//                   initWithLatitude:GPSMap.userLocation.coordinate.latitude
-//                   longitude:GPSMap.userLocation.coordinate.longitude];
+
     coordinate = [userLocation coordinate];
     
     
-  //  NSLog(@"COORDINATES: %@",coordinate);
-    
-    
+    //REVERSE LOOKUP
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         
         if(error == nil && [placemarks count]>0){
             placemark = [placemarks lastObject];
             city = placemark.locality;
             NSLog(@"THIS IS THE CITY: %@",city);
+            takenAt = [NSString stringWithFormat:@"Mobile Upload, %@.png",city];
         }
         else
             NSLog(@"%@",error.debugDescription);
@@ -117,8 +122,7 @@ CLLocationCoordinate2D coordinate;
 
 -(void)getlocation
 {
-    // [CLLocationManager requestWhenInUseAuthorization];
-    // [CLLocationManager requestAlwaysAuthorization];
+//NSA
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     if (status == kCLAuthorizationStatusNotDetermined) {
         NSLog(@"Requesting when in use auth");
@@ -131,12 +135,6 @@ CLLocationCoordinate2D coordinate;
     [locationManager startUpdatingLocation];
     
     coordinate = [userLocation coordinate];
-   // NSLog(@"COORDINATES: %@",coordinate);
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -154,6 +152,7 @@ CLLocationCoordinate2D coordinate;
 
 #pragma mark - Take Photo
 
+//Assume physical camera code works, can't test
 -(IBAction)TakePhoto:(id)sender{
     
     if ([UIImagePickerController isSourceTypeAvailable:
@@ -171,8 +170,7 @@ CLLocationCoordinate2D coordinate;
         _newMedia = YES;
         
         data = UIImagePNGRepresentation(_imageView.image);
-        //        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
-        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"this.png"];
+        file = [NSTemporaryDirectory() stringByAppendingPathComponent:takenAt];
     }
     
 }
@@ -216,8 +214,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         // ADDED ******************
         data = UIImagePNGRepresentation(_imageView.image);
-        //        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"upload.png"];
-        file = [NSTemporaryDirectory() stringByAppendingPathComponent:@"this.png"];
+        file = [NSTemporaryDirectory() stringByAppendingPathComponent:takenAt];
     }
 } //// *************  MAKE SURE TO CHANGE THIS ALONG WITH THE PHYSICAL CAMERA *********************//
 
@@ -242,18 +239,23 @@ finishedSavingWithError:(NSError *)error
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Upload
 -(IBAction)upload:(id)sender{
-//NSString *text = @"Hello world pt2.";
-//NSString *filename = @"working-draft2.txt";
-//NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//NSString *localPath = [localDir stringByAppendingPathComponent:filename];
-//[text writeToFile:localPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    
+    //Trying to leave coordinates as note w/ pic
+    text = [NSString stringWithFormat:@"Latitude: %f \nLongitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude];
+    
+NSString *filename = text;
+NSString *localDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+NSString *localPath = [localDir stringByAppendingPathComponent:filename];
+[text writeToFile:localPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 
     [data writeToFile:file atomically:YES];
     
 // Upload file to Dropbox
     NSString *destDir = @"/";
-    [self.restClient uploadFile:@"this.png" toPath:destDir withParentRev:nil fromPath:file];
+    [self.restClient uploadFile:takenAt toPath:destDir withParentRev:nil fromPath:file];
+ //   [self.restClient uploadFile:text toPath:destDir withParentRev:nil fromPath:file];
 
 }
 
@@ -269,23 +271,26 @@ finishedSavingWithError:(NSError *)error
 #pragma mark - Browse DropBox
 
 //-(IBAction)browse:(id)sender{
-//    
-//    [self.restClient loadMetadata:@"/"];
-//    
+//    [locationManager stopUpdatingLocation];
 //}
-//
-//- (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
-//    if (metadata.isDirectory) {
-//        NSLog(@"Folder '%@' contains:", metadata.path);
-//        for (DBMetadata *file in metadata.contents) {
-//            NSLog(@"	%@", file.filename);
-//        }
-//    }
-//}
-//
-//- (void)restClient:(DBRestClient *)client
-//loadMetadataFailedWithError:(NSError *)error {
-//    NSLog(@"Error loading metadata: %@", error);
-//}
+////-(IBAction)browse:(id)sender{
+////    
+////    [self.restClient loadMetadata:@"/"];
+////    
+////}
+////
+////- (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
+////    if (metadata.isDirectory) {
+////        NSLog(@"Folder '%@' contains:", metadata.path);
+////        for (DBMetadata *file in metadata.contents) {
+////            NSLog(@"	%@", file.filename);
+////        }
+////    }
+////}
+////
+////- (void)restClient:(DBRestClient *)client
+////loadMetadataFailedWithError:(NSError *)error {
+////    NSLog(@"Error loading metadata: %@", error);
+////}
 
 @end

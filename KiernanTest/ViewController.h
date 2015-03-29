@@ -26,7 +26,7 @@ UINavigationControllerDelegate,CLLocationManagerDelegate>{
 -(IBAction)upload:(id)sender;
 -(IBAction)TakePhoto:(id)sender;
 -(IBAction)CameraRoll:(id)sender;
--(IBAction)browse:(id)sender;
+//-(IBAction)browse:(id)sender;
 
 @end
 
