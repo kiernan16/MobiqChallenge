@@ -15,11 +15,14 @@
 
 @implementation ViewController{
     CLLocationManager *locationManager;
-    MKPointAnnotation *point;// = [[MKPointAnnotation alloc] init];
+    CLGeocoder *geocoder;
+    CLPlacemark *placemark;
+   // MKPointAnnotation *point;// = [[MKPointAnnotation alloc] init];
 }
 
 NSData *data;
 NSString *file;
+NSString *city;
 
 CLLocation *userLocation;
 CLLocationCoordinate2D coordinate;
@@ -29,6 +32,21 @@ CLLocationCoordinate2D coordinate;
     // Do any additional setup after loading the view, typically from a nib.
     self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     self.restClient.delegate = self;
+    
+    //maps
+    locationManager = [[CLLocationManager alloc] init];
+    geocoder = [[CLGeocoder alloc] init];
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.delegate = self;
+    
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [locationManager requestWhenInUseAuthorization];
+    }
+    
+    //[self.GPSMap addGestureRecognizer:lpgr];
+    
+    [locationManager requestWhenInUseAuthorization];
+    [locationManager requestAlwaysAuthorization];
     
     if (![[DBSession sharedSession] isLinked]) {
     
@@ -40,6 +58,80 @@ CLLocationCoordinate2D coordinate;
     }
     else
         login.hidden = YES;
+    
+    [self getlocation];
+    
+    
+}
+
+- (NSString *)deviceLocation {
+    return [NSString stringWithFormat:@"latitude: %f longitude: %f", locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+    CLLocation *currentLocation = newLocation;
+    
+    
+    if (currentLocation != nil) {
+        [locationManager stopUpdatingLocation];
+        
+        
+    }
+    
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager setDistanceFilter:kCLDistanceFilterNone];
+    
+    [locationManager startUpdatingLocation];
+    
+//    userLocation= [[CLLocation alloc]
+//                   initWithLatitude:GPSMap.userLocation.coordinate.latitude
+//                   longitude:GPSMap.userLocation.coordinate.longitude];
+    coordinate = [userLocation coordinate];
+    
+    
+  //  NSLog(@"COORDINATES: %@",coordinate);
+    
+    
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        if(error == nil && [placemarks count]>0){
+            placemark = [placemarks lastObject];
+            city = placemark.locality;
+            NSLog(@"THIS IS THE CITY: %@",city);
+        }
+        else
+            NSLog(@"%@",error.debugDescription);
+    }];
+    
+}
+
+-(void)getlocation
+{
+    // [CLLocationManager requestWhenInUseAuthorization];
+    // [CLLocationManager requestAlwaysAuthorization];
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    if (status == kCLAuthorizationStatusNotDetermined) {
+        NSLog(@"Requesting when in use auth");
+        [locationManager requestWhenInUseAuthorization];
+    }
+    
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager setDistanceFilter:kCLDistanceFilterNone];
+    
+    [locationManager startUpdatingLocation];
+    
+    coordinate = [userLocation coordinate];
+   // NSLog(@"COORDINATES: %@",coordinate);
 }
 
 - (void)didReceiveMemoryWarning {
