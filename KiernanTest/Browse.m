@@ -44,7 +44,7 @@ int i;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)];
     i=0;
     pathArray = [[NSMutableArray alloc] init];//WithCapacity:0];
 
@@ -161,7 +161,7 @@ int i;
 
     UITableViewCell *cell = tableView.visibleCells[indexPath.row];
     
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)];
+    imageView.hidden = NO;
     imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
     imageView.userInteractionEnabled=YES;
     imageView.center = self.view.center;
