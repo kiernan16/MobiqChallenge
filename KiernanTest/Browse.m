@@ -158,8 +158,6 @@ int i;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    UITableViewCell *cell = tableView.visibleCells[indexPath.row];
     
     imageView.hidden = NO;
     imageView.image = [UIImage imageNamed: pathArray[indexPath.row]];
