@@ -86,11 +86,7 @@ CLLocationCoordinate2D coordinate;
     CLLocation *currentLocation = newLocation;
     
     
-    if (currentLocation != nil) {
-        [locationManager stopUpdatingLocation];
-        
-        
-    }
+    
     
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [locationManager setDistanceFilter:kCLDistanceFilterNone];
@@ -98,6 +94,12 @@ CLLocationCoordinate2D coordinate;
     [locationManager startUpdatingLocation];
 
     coordinate = [userLocation coordinate];
+    
+    if (currentLocation != NULL) {
+        [locationManager stopUpdatingLocation];
+        
+        
+    }
     
     
     //REVERSE LOOKUP
